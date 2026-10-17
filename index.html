@@ -7,7 +7,17 @@
     <title>Manajemen APAR</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <p id="boot" style="font-family:Arial,sans-serif;text-align:center;padding:40px;color:#6b7280">Memuat aplikasi...</p>
+    </div>
+    <script>
+      // Kalau aplikasi gagal dimuat (mis. file JS tidak ditemukan), tampilkan petunjuk, bukan layar putih.
+      setTimeout(function () {
+        var b = document.getElementById('boot');
+        if (b) b.innerHTML = '⚠️ Aplikasi gagal dimuat.<br><br>Pastikan di GitHub: Settings → Pages → Source = <b>GitHub Actions</b>, ' +
+          'dan proses di tab Actions berstatus hijau.<br><br>Halaman ini: ' + location.href;
+      }, 6000);
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// PENTING: nilai base HARUS sama persis dengan nama repository GitHub Anda,
-// diawali dan diakhiri garis miring. Contoh repo "manajemen-apar" -> '/manajemen-apar/'
+// base './' (relatif) = jalan di repo dengan nama apa pun di GitHub Pages,
+// tidak perlu menyesuaikan nama repository lagi.
 export default defineConfig({
   plugins: [react()],
-  base: '/manajemen-apar/',
+  base: './',
 });
