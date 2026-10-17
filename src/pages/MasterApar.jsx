@@ -34,7 +34,7 @@ export default function MasterApar() {
 
   return (
     <>
-      <h1 className="page-title">🏭 Master APAR (Gedung/Area)</h1>
+      <h1 className="page-title">Master APAR (Gedung/Area)</h1>
       <p className="page-sub">{data ? data.length + ' unit terdaftar' : ''}</p>
       <div className="toolbar"><input placeholder="Cari kode, area, merek, jenis, atau status..." value={q} onChange={(e) => setQ(e.target.value)} /></div>
       {loading && <Loading />}

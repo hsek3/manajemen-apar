@@ -49,7 +49,7 @@ export default function Admin() {
   const { data: s, reload } = useLoad(() => apiAdmin('getAdminSummary'), []);
   return (
     <>
-      <h1 className="page-title">⚙️ Admin - Tambah Data</h1>
+      <h1 className="page-title">Admin - Tambah Data</h1>
       {s && (
         <div className="kpi-grid">
           <div className="kpi"><div className="num">{s.totalArea}</div><div className="lbl">APAR Area/Gedung</div></div>

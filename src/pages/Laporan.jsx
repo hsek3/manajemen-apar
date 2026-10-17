@@ -27,7 +27,7 @@ export default function Laporan() {
 
   return (
     <>
-      <h1 className="page-title no-print">📄 Laporan Bulanan Pemeriksaan APAR</h1>
+      <h1 className="page-title no-print">Laporan Bulanan Pemeriksaan APAR</h1>
       <p className="page-sub no-print">Khusus hasil pengecekan APAR. Perhitungan biaya ada di menu Budget & Realisasi.</p>
 
       <div className="card no-print">
@@ -40,10 +40,10 @@ export default function Laporan() {
         </div>
         <div className="btn-row">
           <button className="btn btn-primary" onClick={tampilkan} disabled={loading}>TAMPILKAN LAPORAN</button>
-          <button className="btn btn-outline" disabled={!d} onClick={() => window.print()}>🖨 PRINT</button>
-          <button className="btn btn-outline" disabled={!d} onClick={() => exportLaporanExcel(d, nama)}>📥 DOWNLOAD EXCEL</button>
-          <button className="btn btn-outline" disabled={!d} onClick={() => exportLaporanPdf(d, nama)}>📄 DOWNLOAD PDF</button>
-          <button className="btn btn-primary" disabled={!d} onClick={() => exportLaporanK3Pdf(d, nama)}>📋 DRAF LAPORAN K3 (PDF)</button>
+          <button className="btn btn-outline" disabled={!d} onClick={() => window.print()}>PRINT</button>
+          <button className="btn btn-outline" disabled={!d} onClick={() => exportLaporanExcel(d, nama)}>DOWNLOAD EXCEL</button>
+          <button className="btn btn-outline" disabled={!d} onClick={() => exportLaporanPdf(d, nama)}>DOWNLOAD PDF</button>
+          <button className="btn btn-primary" disabled={!d} onClick={() => exportLaporanK3Pdf(d, nama)}>DRAF LAPORAN K3 (PDF)</button>
         </div>
       </div>
 
@@ -67,13 +67,13 @@ export default function Laporan() {
               { label: 'Hasil', key: 'hasil' }, { label: 'Tanggal', render: (r) => fmtDateTime(r.tanggal) },
               { label: 'Foto', render: (r) => (r.foto && r.foto.startsWith('http') ? <a href={r.foto} target="_blank" rel="noreferrer">Lihat</a> : '-') },
             ]} /></div>
-          <div className="card"><h3>⚠️ Belum Diperiksa</h3>
+          <div className="card"><h3>Belum Diperiksa</h3>
             <DataTable rows={d.belumDicek} cols={[{ label: 'Kode APAR', key: 'kode' }, { label: 'Lokasi/Unit', key: 'lokasi' }, { label: 'Kategori', key: 'kategori' }]} /></div>
-          <div className="card"><h3>🔴 Expired</h3>
+          <div className="card"><h3>Expired</h3>
             <DataTable rows={d.expiredList} cols={[{ label: 'Kode APAR', key: 'kode' }, { label: 'Lokasi/Unit', key: 'lokasi' }, { label: 'Kategori', key: 'kategori' }]} /></div>
-          <div className="card"><h3>🟡 Akan Expired</h3>
+          <div className="card"><h3>Akan Expired</h3>
             <DataTable rows={d.akanExpiredList} cols={[{ label: 'Kode APAR', key: 'kode' }, { label: 'Lokasi/Unit', key: 'lokasi' }, { label: 'Expired', render: (r) => fmtDate(r.expired) }]} /></div>
-          <div className="card"><h3>🛠 Perlu Perbaikan</h3>
+          <div className="card"><h3>Perlu Perbaikan</h3>
             <DataTable rows={d.perluPerbaikan} cols={[{ label: 'Kode APAR', key: 'kode' }, { label: 'Lokasi/Unit', key: 'lokasi' }, { label: 'PIC', key: 'pic' }, { label: 'Catatan', key: 'catatan' }]} /></div>
         </>
       )}

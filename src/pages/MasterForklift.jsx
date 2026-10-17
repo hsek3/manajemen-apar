@@ -35,7 +35,7 @@ export default function MasterForklift() {
 
   return (
     <>
-      <h1 className="page-title">🚜 Master APAR Forklift</h1>
+      <h1 className="page-title">Master APAR Forklift</h1>
       <p className="page-sub">{data ? data.length + ' unit terdaftar' : ''}</p>
       <div className="toolbar"><input placeholder="Cari kode, unit, jenis, atau status..." value={q} onChange={(e) => setQ(e.target.value)} /></div>
       {loading && <Loading />}

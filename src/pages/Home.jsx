@@ -1,25 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Icon from '../components/Icons.jsx';
 import { apiAdmin } from '../lib/api.js';
 import { useLoad } from '../lib/hooks.js';
-import { Kpi, Loading, ErrorBox } from '../components/ui.jsx';
+import { ErrorBox, Kpi, Loading } from '../components/ui.jsx';
 
 const SHORTCUTS = [
-  ['/dashboard', '📊', 'Dashboard', 'Ringkasan, status, dan budget APAR'],
-  ['/laporan', '📄', 'Laporan Bulanan', 'Rekap pemeriksaan, print/download PDF & Excel, draf laporan K3'],
-  ['/budget', '💰', 'Budget & Realisasi', 'Atur budget rencana vs realisasi'],
-  ['/master-apar', '🏭', 'Master APAR', 'Lihat & edit data APAR area/gedung'],
-  ['/master-forklift', '🚜', 'Master Forklift', 'Lihat & edit data APAR forklift'],
-  ['/admin', '⚙️', 'Admin', 'Tambah APAR, pembelian, PIC, lokasi'],
-  ['/qrcodes', '🔳', 'QR Codes', 'Cetak/download semua QR Code APAR'],
+  ['/dashboard', 'chart', 'Dashboard', 'Ringkasan, status, dan pengeluaran APAR'],
+  ['/laporan', 'file', 'Laporan Bulanan', 'Rekap pemeriksaan, print/PDF/Excel, draf laporan K3'],
+  ['/budget', 'wallet', 'Budget & Realisasi', 'Atur budget rencana vs realisasi'],
+  ['/master-apar', 'building', 'Master APAR', 'Lihat & edit data APAR area/gedung'],
+  ['/master-forklift', 'truck', 'Master Forklift', 'Lihat & edit data APAR forklift'],
+  ['/qrcodes', 'qr', 'QR Codes', 'Cetak/download QR Code semua APAR'],
+  ['/admin', 'settings', 'Admin', 'Tambah APAR, pembelian, PIC, lokasi'],
 ];
 
 export default function Home() {
   const { data: d, loading, error, reload } = useLoad(() => apiAdmin('getDashboardData'), []);
+  const tanggal = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   return (
     <>
-      <h1 className="page-title">Selamat datang 👋</h1>
-      <p className="page-sub">Ringkasan singkat kondisi APAR saat ini.</p>
+      <div className="hero">
+        <div>
+          <h1 className="page-title">Selamat datang</h1>
+          <p className="page-sub" style={{ marginBottom: 0 }}>{d?.namaPerusahaan ? d.namaPerusahaan + ' · ' : ''}{tanggal}</p>
+        </div>
+      </div>
+
       {loading && <Loading />}
       {error && <ErrorBox error={error} onRetry={reload} />}
       {d && (
@@ -32,16 +39,19 @@ export default function Home() {
           <Kpi label="Belum Check" value={d.belumCheck} tone={d.belumCheck > 0 ? 'warn' : ''} />
         </div>
       )}
-      <div className="kpi-grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))' }}>
+
+      <h2 className="section-title">Menu</h2>
+      <div className="tile-grid">
         {SHORTCUTS.map(([to, ic, t, sub]) => (
-          <Link key={to} to={to} className="card" style={{ textDecoration: 'none', marginBottom: 0, display: 'flex', gap: 12, alignItems: 'center' }}>
-            <span style={{ fontSize: 24 }}>{ic}</span>
-            <span><b style={{ color: '#1f4e78', display: 'block', fontSize: 14 }}>{t}</b><span style={{ fontSize: 12, color: '#6b7280' }}>{sub}</span></span>
+          <Link key={to} to={to} className="tile">
+            <span className="tile-ic"><Icon name={ic} size={20} /></span>
+            <span><b>{t}</b><small>{sub}</small></span>
           </Link>
         ))}
       </div>
-      <div className="card" style={{ marginTop: 20, background: '#eff6ff', fontSize: 13 }}>
-        ℹ️ Halaman <b>Check APAR Bulanan</b> tidak ada di menu ini karena dibuka lewat scan QR Code yang tertempel di tiap APAR/forklift.
+
+      <div className="note">
+        Halaman <b>Check APAR Bulanan</b> tidak ada di menu ini karena dibuka lewat scan QR Code yang tertempel di tiap APAR/forklift.
       </div>
     </>
   );

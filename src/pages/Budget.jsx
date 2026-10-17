@@ -53,13 +53,13 @@ export default function Budget() {
 
   return (
     <>
-      <h1 className="page-title">💰 Budget & Realisasi</h1>
+      <h1 className="page-title">Budget & Realisasi</h1>
       <p className="page-sub">Realisasi dihitung otomatis dari data Pembelian (Baru/Refill).</p>
       <div className="toolbar">
         <select value={tahun} onChange={(e) => setTahun(e.target.value)} style={{ maxWidth: 160 }}>
           {(tahunList || []).map((t) => <option key={t}>{t}</option>)}
         </select>
-        <button className="btn btn-outline" onClick={tambahTahun}>➕ Tambah Tahun Baru</button>
+        <button className="btn btn-outline" onClick={tambahTahun}>Tambah Tahun Baru</button>
       </div>
       {error && <ErrorBox error={error} onRetry={muat} />}
       {!rows && !error && <Loading />}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { api, getAdminPw, setAdminPw, clearAdminPw } from '../lib/api.js';
+import Icon from './Icons.jsx';
 
 /** Gerbang password admin. Login tersimpan di browser sehingga cukup 1x login. */
 export default function LoginGate({ children }) {
@@ -46,7 +47,8 @@ export default function LoginGate({ children }) {
   return (
     <div className="login-overlay">
       <form onSubmit={submit} className="login-box">
-        <h2>🔒 Login Diperlukan</h2>
+        <div className="lock-badge"><Icon name="lock" size={22} /></div>
+        <h2>Login Diperlukan</h2>
         <p>Masukkan password admin untuk mengakses halaman ini.</p>
         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} autoFocus />
         <button type="submit" className="btn btn-primary" disabled={busy} style={{ width: '100%' }}>

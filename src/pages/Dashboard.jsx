@@ -29,7 +29,7 @@ export default function Dashboard() {
   if (error) return <ErrorBox error={error} onRetry={reload} />;
   return (
     <>
-      <h1 className="page-title">📊 Dashboard APAR</h1>
+      <h1 className="page-title">Dashboard APAR</h1>
       <p className="page-sub">{d.namaPerusahaan}</p>
       <div className="kpi-grid">
         <Kpi label="Total APAR" value={d.totalApar} />
@@ -46,11 +46,11 @@ export default function Dashboard() {
       </div>
 
       <div className="card">
-        <h3>💰 Pengeluaran APAR</h3>
+        <h3>Pengeluaran APAR</h3>
         <div className="row"><span>Pembelian Baru (bulan ini)</span><b>{rupiah(d.baruBulanIni)}</b></div>
         <div className="row"><span>Biaya Refill (bulan ini)</span><b>{rupiah(d.refillBulanIni)}</b></div>
-        <div className="row"><span>🏭 Gedung/Area (bulan ini)</span><b>{rupiah(d.gedungBulanIni)}</b></div>
-        <div className="row"><span>🚜 Forklift (bulan ini)</span><b>{rupiah(d.forkliftBulanIni)}</b></div>
+        <div className="row"><span>Gedung/Area (bulan ini)</span><b>{rupiah(d.gedungBulanIni)}</b></div>
+        <div className="row"><span>Forklift (bulan ini)</span><b>{rupiah(d.forkliftBulanIni)}</b></div>
         <div className="row"><span>Total Pengeluaran Bulan Ini</span><b>{rupiah(d.totalBulanIni)}</b></div>
         <div className="row"><span>Total Baru (tahun berjalan)</span><b>{rupiah(d.totalBaruTahun)}</b></div>
         <div className="row"><span>Total Refill (tahun berjalan)</span><b>{rupiah(d.totalRefillTahun)}</b></div>

@@ -30,15 +30,15 @@ export default function QRCodes() {
 
   return (
     <>
-      <h1 className="page-title no-print">🔳 QR Code APAR</h1>
+      <h1 className="page-title no-print">QR Code APAR</h1>
       <p className="page-sub no-print">QR berisi link ke halaman checklist: <code>{checklistLink('APAR-001')}</code></p>
       <div className="toolbar no-print">
         <select value={kat} onChange={(e) => setKat(e.target.value)} style={{ maxWidth: 200 }}>
           <option>Semua</option><option>Gedung/Area</option><option>Forklift</option>
         </select>
-        <button className="btn btn-primary" onClick={() => window.print()}>🖨 PRINT</button>
-        <button className="btn btn-outline" disabled={!items.length} onClick={() => exportQrPdf(items, canvasOf)}>📄 DOWNLOAD PDF</button>
-        <button className="btn btn-outline" disabled={!items.length} onClick={() => exportQrExcel(items)}>📥 DOWNLOAD EXCEL (daftar & link)</button>
+        <button className="btn btn-primary" onClick={() => window.print()}>PRINT</button>
+        <button className="btn btn-outline" disabled={!items.length} onClick={() => exportQrPdf(items, canvasOf)}>DOWNLOAD PDF</button>
+        <button className="btn btn-outline" disabled={!items.length} onClick={() => exportQrExcel(items)}>DOWNLOAD EXCEL (daftar & link)</button>
       </div>
       {loading && <Loading />}
       {error && <ErrorBox error={error} onRetry={reload} />}
@@ -48,7 +48,7 @@ export default function QRCodes() {
             <QRCodeCanvas id={'qr_' + i.kode} value={checklistLink(i.kode)} size={150} level="M" includeMargin bgColor="#ffffff" fgColor="#000000" />
             <div className="kode">{i.kode}</div>
             <div className="lokasi">{i.lokasi}</div>
-            <button className="no-print" onClick={() => unduhJpg(i.kode)}>⬇️ JPG</button>
+            <button className="no-print" onClick={() => unduhJpg(i.kode)}>Unduh JPG</button>
           </div>
         ))}
       </div>
