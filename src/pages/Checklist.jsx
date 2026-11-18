@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { api } from '../lib/api.js';
-import { fmtDate, sanitizeKode } from '../lib/helpers.js';
+import { fmtDate, fmtDateTime, sanitizeKode } from '../lib/helpers.js';
 import { StatusBadge } from '../components/ui.jsx';
 
 /** Perkecil foto (maks 1280px, JPEG 70%) supaya upload cepat di sinyal pabrik. */
@@ -104,7 +104,12 @@ export default function Checklist() {
   }
 
   if (result && result.ok) {
-    return <div>{header(apar.lokasiUnit + ' (' + apar.tipe + ')')}<div className="cl-wrap"><div className="msg msg-ok" style={{ margin: 14 }}>✅ {result.message}</div></div></div>;
+    return <div>{header(apar.lokasiUnit + ' (' + apar.tipe + ')')}<div className="cl-wrap"><div className="msg msg-ok" style={{ margin: 14 }}>✅ {result.message}</div>
+      <div className="card">
+        <div className="info-row"><span>Diperiksa oleh</span><b>{result.pic || loggedPic}</b></div>
+        <div className="info-row"><span>Waktu</span><b>{fmtDateTime(result.waktu)}</b></div>
+        <div className="info-row"><span>Hasil</span><b>{hasil}</b></div>
+      </div></div></div>;
   }
 
   return (
@@ -118,6 +123,20 @@ export default function Checklist() {
           <div className="info-row"><span>Kapasitas</span><b>{apar.kapasitas} kg</b></div>
           <div className="info-row"><span>Status Saat Ini</span><StatusBadge s={apar.status} /></div>
           <div className="info-row"><span>Masa Berlaku s/d</span><b>{fmtDate(apar.tanggalExpired)}</b></div>
+          {apar.terakhir ? (
+            <>
+              <div className="info-row"><span>Terakhir Diperiksa</span><b>{fmtDateTime(apar.terakhir.tanggal)}</b></div>
+              <div className="info-row"><span>Diperiksa oleh</span><b>{apar.terakhir.pic || '-'}</b></div>
+              <div className="info-row"><span>Hasil Terakhir</span><b>{apar.terakhir.hasil || '-'}</b></div>
+            </>
+          ) : (
+            <div className="info-row"><span>Terakhir Diperiksa</span><b>Belum pernah</b></div>
+          )}
+          {apar.terakhir && apar.terakhir.bulanIni ? (
+            <div className="msg msg-ok">Bulan ini sudah diperiksa oleh <b>{apar.terakhir.pic}</b>. Anda tetap bisa mengisi lagi bila diperlukan.</div>
+          ) : (
+            <div className="msg msg-warn">Bulan ini belum diperiksa.</div>
+          )}
           <p className="hint">Lokasi &amp; data APAR terisi otomatis dari hasil scan QR. Tanggal &amp; jam pemeriksaan tercatat otomatis saat Anda submit.</p>
         </div>
 
